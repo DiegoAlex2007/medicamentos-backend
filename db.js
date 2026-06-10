@@ -1,11 +1,13 @@
-const { Pool } = require("pg");
+import pkg from "pg";
+import dotenv from "dotenv";
 
-const pool = new Pool({
-    host: "localhost",
-    user: "postgres",
-    password: "1981",
-    database: "SGM",
-    port: 5432
+dotenv.config();
+
+const { Pool } = pkg;
+
+export const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
-
-module.exports = pool;
